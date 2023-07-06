@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+help() {
+    cat >&2 << EOF
+ReImg Developer Tool
+
+Commands
+    build           Build image
+    install <blk>   Install image on the given block device
+    update          Update currently running ReImg system
+
+Options
+    -h|--help       Show this help
+EOF
+}
+
+main() {
+    set -euo pipefail
+    shopt -s nullglob
+
+    LC_ALL="C"
+    LANG="C"
+    LANGUAGE="C"
+
+    local SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+
+    local ARGV=("$@")
+    local TEMP
+    if ! TEMP="$(getopt -o "h" -l "help" -n "$0" -- "$@")"
+    then
+        return 1
+    fi
+    eval set -- "$TEMP"
+
+    while true
+    do
+        TEMP="$1"
+        shift
+        case "$TEMP" in
+            -h|--help)
+                help
+                return
+                ;;
+            --)
+                break
+                ;;
+        esac
+    done
+
+    TEMP="${1:-help}"
+    case "$TEMP" in
+        build)
+            pushd "$SCRIPT_DIR"
+            nix build
+            popd
+            ;;
+        install)
+            if [ -b "$2" ]
+            then
+                sudo dd if="$SCRIPT_DIR"/result/nixos.img of="$2" bs=16M status=progress
+                sudo mount "$2"2 /mnt
+                rsync -a --no-links "$SCRIPT_DIR" /mnt/home/radxa/ReImg/
+                sudo umount /mnt
+                sync
+            else
+                echo "$2 is not a block device." >&2
+                return 1
+            fi
+            ;;
+        update)
+            nixos-generate-config --force --dir "$SCRIPT_DIR"/configs
+            sudo nix-channel --add https://nixos.org/channels/nixos-23.05 nixos
+            sudo nixos-rebuild --upgrade --flake "$SCRIPT_DIR"#ReImg switch
+            ;;
+        help)
+            help
+            ;;
+        *)
+            echo "Unknwon command $TEMP." >&2
+            return 1
+            ;;
+    esac
+}
+
+main "$@"
