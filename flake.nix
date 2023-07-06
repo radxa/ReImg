@@ -29,6 +29,7 @@
         modules = [
           ./configs/base.nix
           ./configs/hardware-configuration.nix
+          ./configs/plymouth.nix
           ./configs/plasma5.nix
           home-manager.nixosModules.home-manager
           {
@@ -47,6 +48,7 @@
         modules = [
           ./configs/base.nix
           ./configs/hardware-configuration.nix
+          ./configs/plymouth.nix
           ./configs/plasma5.nix
           home-manager.nixosModules.home-manager
           {

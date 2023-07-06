@@ -12,7 +12,6 @@
       breeze-qt5
       breeze-gtk
       breeze-icons
-      breeze-plymouth
       discover
       kate
     ];

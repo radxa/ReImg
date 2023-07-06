@@ -3,11 +3,6 @@
 {
   powerManagement.enable = true;
 
-  boot.plymouth = {
-    enable = true;
-    theme = "breeze";
-  };
-
   environment = {
     variables = {
       MOZ_ENABLE_WAYLAND = "1";
