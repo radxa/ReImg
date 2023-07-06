@@ -16,6 +16,14 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Install nix
+        uses: cachix/install-nix-action@v22
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install nixos-generators
+        run: |
+          nix profile install github:nix-community/nixos-generators
       - name: Build
         run: |
           ./reimg build
