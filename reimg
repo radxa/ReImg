@@ -59,7 +59,10 @@ main() {
             then
                 sudo dd if="$SCRIPT_DIR"/result/nixos.img of="$2" bs=16M status=progress
                 sudo mount "$2"2 /mnt
-                rsync -a --no-links "$SCRIPT_DIR" /mnt/home/radxa/ReImg/
+                if [[ -d /mnt/home/radxa/ ]]
+                then
+                    rsync -a --no-links "$SCRIPT_DIR" /mnt/home/radxa/ReImg/
+                fi
                 sudo umount /mnt
                 sync
             else
