@@ -1,8 +1,12 @@
 { config, pkgs, lib, ... }:
 
 {
-  boot.plymouth = {
-    enable = true;
-    theme = "breeze";
+  boot = {
+    plymouth = {
+      enable = true;
+    };
+    kernelParams = [
+      "plymouth.ignore-serial-consoles"
+    ];
   };
 }
