@@ -1,30 +1,27 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, modulesPath, ... }:
 
 {
+  imports = [
+    "${modulesPath}/profiles/base.nix"
+    "${modulesPath}/profiles/all-hardware.nix"
+  ];
+
   # Support common file systems
   boot = {
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     supportedFilesystems = [ 
       # There is a build error for apfs module
       # "apfs"
-      "btrfs"
-      "cifs"
       "exfat"
-      "ext4"
-      "f2fs"
       "nfs"
-      "ntfs"
-      "vfat"
-      "xfs"
-      "zfs"
     ];
     initrd.availableKernelModules = [
-    "virtio_blk"
-    "virtio_pmem"
-    "virtio_console"
-    "virtio_pci"
-    "virtio_mmio"
-    "virtio_scsi"
+      "virtio_blk"
+      "virtio_pmem"
+      "virtio_console"
+      "virtio_pci"
+      "virtio_mmio"
+      "virtio_scsi"
     ];
     initrd.kernelModules = [
       "i915"
@@ -37,9 +34,6 @@
       "console=tty0"
       "console=ttyS0"
     ];
-    loader = {
-      systemd-boot.enable = true;
-    };
   };
 
   environment = {
@@ -118,8 +112,6 @@
   };
 
   networking = {
-    # This is required for ZFS
-    hostId = "00000000";
     hostName = "ReImg";
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
