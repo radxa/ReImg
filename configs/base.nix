@@ -115,6 +115,8 @@
     hostName = "ReImg";
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
+    # wireless cannot be used with networkmanager at same time
+    wireless.enable = lib.mkForce false;
   };
 
   nixpkgs.config.allowUnfree = true;
