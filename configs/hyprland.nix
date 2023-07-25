@@ -9,6 +9,7 @@
     };
   
     systemPackages = with pkgs; [
+      kitty
       hyprpaper
       nwg-drawer
     ];

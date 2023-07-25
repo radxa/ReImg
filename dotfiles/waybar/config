@@ -94,7 +94,7 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "on-click": "konsole htop"
+        "on-click": "kitty htop"
     },
     "memory": {
         "format": "{}% "
