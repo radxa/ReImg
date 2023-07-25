@@ -30,7 +30,7 @@
         patches = (oldAttrs.patches or []) ++ [
           (pkgs.fetchpatch {
             name = "fix waybar hyprctl";
-            url = "https://aur.archlinux.org/cgit/aur.git/plain/hyprctl.patch?h=waybar-hyprland-git";
+            url = "https://aur.archlinux.org/cgit/aur.git/plain/hyprctl.patch?h=waybar-hyprland-git&id=1ec549866eba42ae47920da6be4519d06962ca1c";
             sha256 = "sha256-pY3+9Dhi61Jo2cPnBdmn3NUTSA8bAbtgsk2ooj4y7aQ=";
           })
         ];
