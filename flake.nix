@@ -30,7 +30,7 @@
           ./configs/base.nix
           ./configs/hardware-configuration.nix
           ./configs/plymouth.nix
-          ./configs/plasma5.nix
+          ./configs/hyprland.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -49,7 +49,7 @@
           ./configs/base.nix
           ./configs/hardware-configuration.nix
           ./configs/plymouth.nix
-          ./configs/plasma5.nix
+          ./configs/hyprland.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
