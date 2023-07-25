@@ -17,7 +17,6 @@
     };
   
     systemPackages = with pkgs; [
-      libsForQt5.konsole
       htop
       pavucontrol
     ];
