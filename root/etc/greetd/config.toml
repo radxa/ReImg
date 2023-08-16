@@ -1,0 +1,10 @@
+[terminal]
+vt = next
+
+[default_session]
+command = "/usr/bin/Hyprland --config /etc/greetd/wmconfig >/dev/null 2>&1"
+user = "greeter"
+
+[initial_session]
+command = "/usr/bin/Hyprland >/dev/null 2>&1"
+user = "radxa"
